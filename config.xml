@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<computer>
+<!--电脑类型 1 前置机 2 his 3 lis 4 pacs 5 其他-->
+<type>2</type>
+<!--向服务器每次轮旋间隔时间 毫秒 默认是2秒-->
+<while_time>300000</while_time>
+<!--要监控的采集程序名称-->
+<coll_proce>MainDataCollectionSrv.exe</coll_proce>
+<!--如果前置机上使用远程桌面连接到his、lis、pacs 等机器需要监控远程桌面的状态-->
+<!--ischeck 如果是0 就不开启远程桌面断线重连检测 1 就是开启 timeout 表示每次监控的时间间隔 默认是5分钟30万毫秒1000毫秒是1,秒-->
+<remote_monitor ischeck ="0" timeout="300000">
+<!-- remote_item 填写要监控的远程ip:prot:width:height 例子如下-->
+<remote_item>192.168.0.103:3389:1024:768</remote_item>
+</remote_monitor>
+<!--配置上传更新地址 如http://192.168.1.108:5233/PascRoadMysql/api/-->
+<request_address>http://192.168.0.203:5233/PascRoadMysql/api/</request_address>
+<!--
+是否开启委托服务器 
+委托服务器是代前置机服务转发给其他内网机器数据的存在，
+这种情况只在前置机无法与其他内网机器单方面的发送数据，
+只能被动的接收来自其他内网机器发来的数据的情况下才建议开启。
+isdelegation = 0是不开启，这种是默认的 非0 即是开启
+timeout 控制委托服务器每次轮旋前置机服务器的时间间隔 默认是3000毫秒也就是3秒
+-->
+<delegation_serivce isdelegation= "0" timeout="3000">
+<!--dist_target 表示要转发到的目标机器IP地址 一个节点代表一个目标机器多个就复制多行填写-->
+<dist_target>192.168.0.203</dist_target>
+</delegation_serivce>
+<!--程序版本号-->
+<version>1.0.2</version>
+<!--
+收到客户端请求超时间隔
+默认10分钟单位分钟
+-->
+<client_timeout>1</client_timeout>
+<!--被监控客户机的数量-->
+<client_num>1</client_num>
+</computer>
